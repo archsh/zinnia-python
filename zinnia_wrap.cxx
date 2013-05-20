@@ -5431,7 +5431,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  SWIG_Python_SetConstant(d, "VERSION",SWIG_FromCharPtr("0.05"));
+  SWIG_Python_SetConstant(d, "VERSION",SWIG_FromCharPtr("0.06"));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else
