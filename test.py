@@ -7,14 +7,14 @@ input = "(character (width 1000)(height 1000)(strokes ((243 273)(393 450))((700 
 try:
     s = zinnia.Character()
     r = zinnia.Recognizer()
-    r.open("/usr/local/lib/zinnia/model/tomoe/handwriting-ja.model")
+    r.open("handwriting-zh_CN.model")
 
     if (not s.parse(input)):
         print s.what()
     result = r.classify(s, 10)
     size = result.size()
     for i in range(0, (size - 1)):
-        print "%s\t%f" % (result.value(i), result.score(i))
+        print result.value(i).decode('utf8'), '\t-\t',result.score(i)
 
     s.clear();
     s.set_width(300)
@@ -41,7 +41,7 @@ try:
     result = r.classify(s, 10)
     size = result.size()
     for i in range(0, (size - 1)):
-        print "%s\t%f" % (result.value(i), result.score(i))
+        print result.value(i).decode('utf8'), '\t-\t',result.score(i)
 
 except RuntimeError, e:
     print "RuntimeError: ", e,
