@@ -13,16 +13,18 @@ if OS.startswith('Windows'):
 #DEFS =  -D_CRT_SECURE_NO_DEPRECATE -DDLL_EXPORT -DHAVE_WINDOWS_H -DVERSION="\"@VERSION@\"" -DPACKAGE="\"@PACKAGE@\""
 #INC = -I. -I..
 #svm.obj libzinnia.obj character.obj feature.obj recognizer.obj trainer.obj param.obj sexp.obj
-    def_macros  =[('WIN32',1),('_WIN32',1),('_CRT_SECURE_NO_DEPRECATE',1),
-                  ('DLL_EXPORT',1),('HAVE_WINDOWS_H',1),('VERSION','\\"%s\\"'%__version__),('PACKAGE','\\"_zinnia\\"')]
+    def_macros  =[('WIN32',1),('_WIN32',1),('DLL_EXPORT',1),('HAVE_WINDOWS_H',1),]
     extra_compile_args = ['/O2', '/GA', '/GL', '/Gy', '/Oi', '/Ob2', '/nologo', '/W3', '/EHsc', '/MT', '/wd4244']
     extra_link_args =['/link', '/OPT:REF', '/OPT:ICF', '/LTCG', '/NXCOMPAT', '/DYNAMICBASE', 'ADVAPI32.LIB']
     #ET199_LIB.append('ET199_S.lib')
 elif OS.startswith('ELF'):
-    def_macros  =[('LINUX',1)]
-    extra_compile_args = []
+    def_macros  =[('LINUX',1),('PIC',1),('HAVE_CONFIG_H',1)]
+    extra_compile_args = ['-fPIC',]
     extra_link_args =[]
     #ET199_LIB.append('libET199.a')
+def_macros.extend([('_CRT_SECURE_NO_DEPRECATE',1),('VERSION','\\"%s\\"'%__version__),('PACKAGE','\\"_zinnia\\"')])
+extra_compile_args.extend([])
+extra_link_args.extend([])
 
 setup(name = "zinnia-python",
       version=__version__,
